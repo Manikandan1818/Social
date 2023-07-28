@@ -9,7 +9,7 @@ import PostPage from "./PostPage";
 function App() {
   return (
     <div className="App">
-      <Home />
+      <Home title="Social APP" />
       <Nav />
       <About />
       <NewPost />
