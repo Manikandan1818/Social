@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import About from "./About";
 import Footer from "./Footer";
 import Home from "./Home";
@@ -7,6 +7,7 @@ import Nav from "./Nav";
 import NewPost from "./NewPost";
 import PostPage from "./PostPage";
 import Header from "./Header";
+import { format } from "date-fns";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -37,14 +38,42 @@ function App() {
   ]);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [postTitle, setPostTitle] = useState("");
+  const [postBody, setPostBody] = useState("");
+
+  useEffect(() => {
+    const filteredResults = posts.filter(
+      (post) =>
+        post.body.toLowerCase().includes(search.toLowerCase()) ||
+        post.title.toLowerCase().includes(search.toLowerCase())
+    );
+    setSearchResults(filteredResults.reverse());
+  }, [posts, search]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const id = posts.length ? posts[posts.length - 1].id + 1 : 1;
+    const dateTime = format(new Date(), "MMMM dd, yyyy pp");
+    const newPost = { id, title: postTitle, dateTime, body: postBody };
+    const allPosts = [...posts, newPost];
+    setPosts(allPosts);
+    setPostTitle("");
+    setPostBody("");
+  };
 
   return (
     <div className="App">
       <Header title="Social APP" />
       <Nav search={search} setSearch={setSearch} />
-      <Home posts={posts} />
+      <Home posts={searchResults} />
       <About />
-      <NewPost />
+      <NewPost
+        handleSubmit={handleSubmit}
+        postTitle={postTitle}
+        setPostTitle={setPostTitle}
+        postBody={postBody}
+        setPostBody={setPostBody}
+      />
       <PostPage />
       <Missing />
       <Footer />
