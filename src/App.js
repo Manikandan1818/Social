@@ -5,9 +5,9 @@ import Home from "./Home";
 import Missing from "./Missing";
 import Nav from "./Nav";
 import NewPost from "./NewPost";
-import PostPage from "./PostPage";
 import Header from "./Header";
 import { format } from "date-fns";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -65,17 +65,23 @@ function App() {
     <div className="App">
       <Header title="Social APP" />
       <Nav search={search} setSearch={setSearch} />
-      <Home posts={searchResults} />
-      <About />
-      <NewPost
-        handleSubmit={handleSubmit}
-        postTitle={postTitle}
-        setPostTitle={setPostTitle}
-        postBody={postBody}
-        setPostBody={setPostBody}
-      />
-      <PostPage />
-      <Missing />
+      <Routes>
+        <Route path="/" element={<Home posts={searchResults} />} />
+        <Route
+          path="post"
+          element={
+            <NewPost
+              handleSubmit={handleSubmit}
+              postTitle={postTitle}
+              setPostTitle={setPostTitle}
+              postBody={postBody}
+              setPostBody={setPostBody}
+            />
+          }
+        />
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<Missing />} />
+      </Routes>
       <Footer />
     </div>
   );
