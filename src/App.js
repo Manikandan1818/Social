@@ -3,6 +3,7 @@ import About from "./About";
 import Footer from "./Footer";
 import Home from "./Home";
 import Missing from "./Missing";
+import PostPage from "./PostPage";
 import Nav from "./Nav";
 import NewPost from "./NewPost";
 import Header from "./Header";
@@ -61,14 +62,19 @@ function App() {
     setPostBody("");
   };
 
+  const handleDelete = () => {
+    console.log("clicked");
+  };
+
   return (
     <div className="App">
       <Header title="Social APP" />
       <Nav search={search} setSearch={setSearch} />
       <Routes>
         <Route path="/" element={<Home posts={searchResults} />} />
+        <Route path="post" />
         <Route
-          path="post"
+          index
           element={
             <NewPost
               handleSubmit={handleSubmit}
@@ -79,6 +85,11 @@ function App() {
             />
           }
         />
+        <Route
+          path="id"
+          element={<PostPage posts={posts} handleDelete={handleDelete} />}
+        />
+
         <Route path="about" element={<About />} />
         <Route path="*" element={<Missing />} />
       </Routes>
