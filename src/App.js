@@ -9,7 +9,7 @@ import NewPost from "./NewPost";
 import Header from "./Header";
 import { format } from "date-fns";
 import { Route, Routes, useNavigate } from "react-router-dom";
-
+// {we need to install axios}
 function App() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
@@ -36,7 +36,7 @@ function App() {
     setPosts(allPosts);
     setPostTitle("");
     setPostBody("");
-    
+
     navigate("/");
   };
 
