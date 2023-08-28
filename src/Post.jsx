@@ -6,10 +6,10 @@ const Post = ({ post }) => {
     <article className="Post">
       <Link to={`post/${post.id}`}>
         <h2>{post.title}</h2>
-        <p className="postDate">{post.datetime}</p>
+        <p className="postDate">{post.datetaaaime}</p>
       </Link>
 
-      <p className="apostBaody">
+      <p className="apostBody">
         {post.body.length <= 25 ? post.body : `${post.body.slice(0, 25)}...`}
       </p>
     </article>
