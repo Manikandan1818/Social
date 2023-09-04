@@ -247,6 +247,10 @@ body {
     text-align: right;
   }
 
+  .Nav ul {
+    text-align: right;
+  }
+
   .Nav li:hover,
   .Nav li:focus,
   .Nav li:hover a,
